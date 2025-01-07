@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Petrol/Gas Prices Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Data Table</h2>
+            <div class="table-container">
+                {{ table_html|safe }}
+            </div>
+        </section>
+        <section>
+            <h2>Bar Chart: Price Per Gallon (USD)</h2>
+            <div id="bar-chart"></div>
+        </section>
+        <section>
+            <h2>Line Chart: Daily Oil Consumption (Barrels)</h2>
+            <div id="line-chart"></div>
+        </section>
+        <section>
+            <h2>Pie Chart: Yearly Gallons Per Capita by Country</h2>
+            <div id="pie-chart"></div>
+        </section>
+    </main>
+    <script>
+        // Render Bar Chart
+        const barChart = {{ bar_chart|safe }};
+        Plotly.newPlot('bar-chart', barChart.data, barChart.layout);
+
+        // Render Line Chart
+        const lineChart = {{ line_chart|safe }};
+        Plotly.newPlot('line-chart', lineChart.data, lineChart.layout);
+
+        // Render Pie Chart
+        const pieChart = {{ pie_chart|safe }};
+        Plotly.newPlot('pie-chart', pieChart.data, pieChart.layout);
+    </script>
+</body>
+</html>
